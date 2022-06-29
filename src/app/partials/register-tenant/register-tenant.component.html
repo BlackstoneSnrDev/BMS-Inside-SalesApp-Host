@@ -1,0 +1,103 @@
+<div class="row main-row">
+  <div class="col-sm-12 d-flex justify-content-center">  
+   
+    <form
+      [formGroup]="tenantForm"
+      *ngIf="tenantForm"
+      class="tenantForm"
+      (ngSubmit)="saveNewTenant()"
+    >
+    <h1>Create tenant user</h1>
+    <hr>
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-4">
+          <div class="width-100 center-cnt">
+            <div class="logo-main-container">
+              <div class="logo-container">
+                <img class="logo" src="https://brandlogos.net/wp-content/uploads/2020/11/hp-logo.png" />
+              </div>
+            </div>
+          </div>
+            <div class="width-100 center-cnt margin-tp">
+              <p-fileUpload #fubauto mode="basic" name="demo[]" url="" accept="image/*" [auto]="true" chooseLabel="Browse"></p-fileUpload>
+            </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="form-row">
+            <div class="col-lg-6">
+              <div class="margin-bt color-rd txt-center">
+                <b>{{ statusMsg }}</b>
+              </div>
+            </div>
+          </div>
+          <div class="form-row" [ngClass]="!tenantForm.valid ? 'show' : 'hide'">
+            <div class="col-lg-6">
+                *All fields must be filled out.
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-lg-6">
+              <mat-form-field appearance="standard">
+                <mat-label>Tenant name</mat-label>
+                <input
+                  matInput
+                  class="input-neumorphism"
+                  type="text"
+                  autocomplete="off"
+                  id="name"
+                  formControlName="name"
+                  [(ngModel)]="name"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+              <mat-form-field appearance="standard">
+                <mat-label>Admin user's email</mat-label>
+                <input
+                  matInput
+                  class="input-neumorphism"
+                  type="text"
+                  placeholder="Ex. bms@bms.com"
+                  autocomplete="off"
+                  id="username"
+                  formControlName="username"
+                  [(ngModel)]="username"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+              <mat-form-field appearance="standard">
+                <mat-label>Admin user's password</mat-label>
+                <input
+                  matInput
+                  class="input-neumorphism"
+                  type="password"
+                  placeholder="****"
+                  autocomplete="off"
+                  id="password"
+                  formControlName="password"
+                  [(ngModel)]="password"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+              <button
+                type="submit"
+                value="save"
+                [disabled]="!tenantForm.valid"
+                class="width-100 btn-center"
+                [ngClass]="
+                  !tenantForm.valid
+                    ? 'button-neumorphism-disabled'
+                    : 'button-neumorphism'
+                "
+              >
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

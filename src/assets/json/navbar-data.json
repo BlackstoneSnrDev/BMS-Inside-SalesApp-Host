@@ -1,0 +1,16 @@
+{
+    "navbar_img_logo": "bmsDarkLogo.png",
+    "navbar_company_name": "Blackstone Medical Services",
+    "navbar_tabs": [
+        {
+            "tab_name": "Home",
+            "tab_icon": "bi bi-house-fill",
+            "tab_route": "home"
+        },
+        {
+            "tab_name": "Register tenant",
+            "tab_icon": "bi bi-person-plus-fill",
+            "tab_route": "register-tenant"
+        }
+    ]
+}
