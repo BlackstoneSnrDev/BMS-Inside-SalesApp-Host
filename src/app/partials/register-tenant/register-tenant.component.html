@@ -1,103 +1,171 @@
 <div class="row main-row">
-  <div class="col-sm-12 d-flex justify-content-center">  
-   
-    <form
-      [formGroup]="tenantForm"
-      *ngIf="tenantForm"
-      class="tenantForm"
-      (ngSubmit)="saveNewTenant()"
-    >
-    <h1>Create tenant user</h1>
-    <hr>
-      <div class="row d-flex justify-content-center">
-        <div class="col-lg-4">
-          <div class="width-100 center-cnt">
-            <div class="logo-main-container">
-              <div class="logo-container">
-                <img class="logo" src="https://brandlogos.net/wp-content/uploads/2020/11/hp-logo.png" />
+  <div class="col-sm-12 d-flex">
+    <form [formGroup]="tenantForm" *ngIf="tenantForm" class="tenantForm">
+      <h1 class="padding-bt margin-bt">Create tenant user</h1>
+      <div class="row form-container">
+        <div class="col-lg-4 center-cnt">
+          <p-fileUpload
+            [ngClass]="uploadedImg.length == 0 ? 'fileUp' : ''"
+            [customUpload]="true"
+            #uploadLogo
+            (uploadHandler)="uploadImgLogo($event, uploadLogo)"
+            [multiple]="false"
+            accept="image/*"
+            chooseLabel="Browse"
+            uploadLabel="Select"
+          >
+            <ng-template pTemplate="content">
+              <div *ngIf="uploadedImg.length == 0 && !blobURLImg">
+                <span class="logo-container-size">
+                  <img src="../../../assets/img/logoSize.png" />
+                </span>
               </div>
-            </div>
-          </div>
-            <div class="width-100 center-cnt margin-tp">
-              <p-fileUpload #fubauto mode="basic" name="demo[]" url="" accept="image/*" [auto]="true" chooseLabel="Browse"></p-fileUpload>
-            </div>
+              <span class="logo-container-size" id="blobImg"></span>
+            </ng-template>
+          </p-fileUpload>
+          <span
+            *ngIf="tenantForm.get('tenantLogo')?.hasError('required')"
+            class="logo-img validator-container"
+          >
+            <i class="bi bi-exclamation-triangle margin-rt"></i> Select logo.
+          </span>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-8 form-tenant-container">
           <div class="form-row">
-            <div class="col-lg-6">
-              <div class="margin-bt color-rd txt-center">
-                <b>{{ statusMsg }}</b>
-              </div>
-            </div>
-          </div>
-          <div class="form-row" [ngClass]="!tenantForm.valid ? 'show' : 'hide'">
-            <div class="col-lg-6">
-                *All fields must be filled out.
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-lg-6">
+            <div class="col-sm-4">
               <mat-form-field appearance="standard">
                 <mat-label>Tenant name</mat-label>
                 <input
                   matInput
+                  (keyup)="capStatus($event)"
                   class="input-neumorphism"
                   type="text"
                   autocomplete="off"
-                  id="name"
-                  formControlName="name"
-                  [(ngModel)]="name"
+                  formControlName="tenantName"
+                  placeholder="Tenant name"
                 />
               </mat-form-field>
             </div>
-            <div class="col-lg-6">
+            <div class="col-sm-4">
               <mat-form-field appearance="standard">
-                <mat-label>Admin user's email</mat-label>
+                <mat-label>Admin email</mat-label>
                 <input
+                  name="emailTenant"
                   matInput
+                  (keyup)="capStatus($event)"
+                  pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
                   class="input-neumorphism"
-                  type="text"
+                  type="email"
                   placeholder="Ex. bms@bms.com"
-                  autocomplete="off"
-                  id="username"
-                  formControlName="username"
-                  [(ngModel)]="username"
+                  autocomplete="new-password"
+                  formControlName="adminUsername"
                 />
               </mat-form-field>
+              <span
+                *ngIf="tenantForm.get('adminUsername')?.hasError('pattern')"
+                class="validator-container"
+              >
+                {{ capsStatus }}
+                <br />
+                <p class="inside-validator">
+                  <i class="bi bi-exclamation-triangle margin-rt"></i>Use a
+                  valid email address.</p
+                >
+              </span>
             </div>
-            <div class="col-lg-6">
+            <div class="col-sm-4">
               <mat-form-field appearance="standard">
-                <mat-label>Admin user's password</mat-label>
+                <mat-label>Admin password</mat-label>
+                <input
+                  name="passTenant"
+                  matInput
+                  (keyup)="capStatus($event)"
+                  class="input-neumorphism"
+                  [type]="hide ? 'password' : 'text'"
+                  pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  placeholder="Ex. Password19"
+                  autocomplete="new-password"
+                  formControlName="adminPassword"
+                />
+                <mat-icon matSuffix (click)="hide = !hide">
+                  <i [ngClass]="hide ? 'show' : 'hide'" class="bi bi-eye"></i>
+                  <i
+                    [ngClass]="!hide ? 'show' : 'hide'"
+                    class="bi bi-eye-slash"
+                  ></i>
+                </mat-icon>
+              </mat-form-field>
+              <span
+                *ngIf="tenantForm.get('adminPassword')?.hasError('pattern')"
+                class="validator-container"
+              >
+                {{ capsStatus }}
+                <br />
+                <p class="inside-validator">
+                  <i class="bi bi-exclamation-triangle margin-rt"></i> Use 8 or
+                  more characters with a mix of lowercase, upercase letters &
+                  numbers.</p
+                >
+              </span>
+            </div>
+          </div>
+
+          <div
+            class="form-row width-100"
+            *ngFor="let item of items; let indexSection = index"
+          >
+            <div class="form-check form-check-inline width-100">
+              <button
+                matTooltip="Remove field"
+                matTooltipPosition="above"
+                class="iconbutton-neumorphism btn-icon-remove"
+                (click)="removeClonedPhoneField()"
+              >
+                <i class="bi bi-node-minus-fill i-bigger"></i>
+              </button>
+
+              <mat-form-field appearance="standard" class="phone-field">
+                <mat-label>Phone number</mat-label>
                 <input
                   matInput
                   class="input-neumorphism"
-                  type="password"
-                  placeholder="****"
-                  autocomplete="off"
-                  id="password"
-                  formControlName="password"
-                  [(ngModel)]="password"
+                  type="number"
+                  placeholder="Phone number"
+                  formControlName="phoneNumber{{ indexSection }}"
                 />
               </mat-form-field>
-            </div>
-            <div class="col-lg-6">
+
               <button
-                type="submit"
-                value="save"
-                [disabled]="!tenantForm.valid"
-                class="width-100 btn-center"
-                [ngClass]="
-                  !tenantForm.valid
-                    ? 'button-neumorphism-disabled'
-                    : 'button-neumorphism'
-                "
+                matTooltip="Add new field"
+                matTooltipPosition="above"
+                class="iconbutton-neumorphism btn-icon-clone"
+                (click)="clonePhoneField()"
               >
-                Create
+                <i class="bi bi-node-plus-fill i-bigger"></i>
               </button>
             </div>
+          </div>
+          <div class="form-row d-flex justify-content-center margin-tp">
+            <button
+              type="submit"
+              value="save"
+              [disabled]="!tenantForm.valid"
+              class="width-50 btn-center"
+              [ngClass]="
+                !tenantForm.valid
+                  ? 'button-neumorphism-disabled'
+                  : 'button-neumorphism'
+              "
+              (click)="saveNewTenant()"
+            >
+              Create
+            </button>
           </div>
         </div>
       </div>
     </form>
   </div>
 </div>
+<p-confirmDialog rejectLabel="Cancel" acceptLabel="Accept"></p-confirmDialog>
+<p-toast life="5000" position="top-center"></p-toast>
+<p-scrollTop [threshold]="200"></p-scrollTop>
