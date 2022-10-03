@@ -55,7 +55,7 @@ export class UsersService {
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
         this.loggedIn.next(true);
-        this.router.navigateByUrl('register-tenant');
+        this.router.navigateByUrl('home');
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -110,26 +110,16 @@ export class UsersService {
     });
   }
 
-  getUserData(uid: any) {
-      let localTenantName :string;
-      if (uid) {
-        const data = this.afs.collection('Tenant').ref;
-        data.where('uids', 'array-contains', uid).get().then((docs) => {
-          docs.forEach((doc) => {
-              localTenantName = doc.id
-              this.tenantName.next(doc.id)
-          })
-        }).then((res) => {
-            const localUserData = this.afs.collection('Tenant').doc(localTenantName).collection('users').doc(uid).ref;
-            localUserData.get().then((res) => {
-                let localUserInfo: any = res.data();
-                this.user.next(localUserInfo);
-            })
+    getUserData(uid: any) {
+        console.log(uid);
+        const coachData = this.afs.collection('Coach').doc(uid).ref;
+        coachData.get().then((res) => {
+            let localUserInfo: any = res.data();
+            this.user.next(localUserInfo);
+            console.log(localUserInfo);
         })
-      } else {
-          console.log('no uid');
-      }
-  }
+
+    }
 
 
     /* Setting up user data when sign in with username/password, 

@@ -6,8 +6,12 @@ import {
     AngularFirestore,
     AngularFirestoreDocument,
   } from '@angular/fire/compat/firestore'; 
+import { RandomId } from './services.randomId';
 
-  
+let len = 12;
+let pattern = 'aA0';
+// let randomstring = RandomId(len, pattern);
+
 
 @Injectable({
 
@@ -18,6 +22,7 @@ import {
 export class DataService {
 
   public navbarDataURL: string;
+  public initialTemplateCustomers: string;
   public formElementsURL: string;
   public formCityURL: string;
   public formCountryURL: string;
@@ -37,6 +42,7 @@ export class DataService {
   ){
 
     this.navbarDataURL = "../../assets/json/navbar-data.json";
+    this.initialTemplateCustomers = "../../assets/json/initialTemplateCustomers.json";
     this.formElementsURL = "../../assets/json/form-elements.json";
     this.formCityURL = "https://countriesnow.space/api/v0.1/countries/";
     this.formCountryURL = "https://countriesnow.space/api/v0.1/countries/iso";
@@ -47,6 +53,27 @@ export class DataService {
     this.tableDataURL = "../../assets/json/queueTable-data.json";
 
   }
+
+    createNewTenant() {
+
+        let customers = this._http.get(this.initialTemplateCustomers);
+        customers.subscribe((data) => {
+            Object.values(data).forEach((customer) => {
+                customer.uid = RandomId(len, pattern);
+                console.log(customer);
+            })
+        })
+        
+    }
+
+    getClientList(clientArray: any) {
+      
+        clientArray.forEach((client: string | undefined) => {
+            this.afs.collection('Tenant').doc(client).ref.get().then((docs) => {
+                console.log(docs.data());
+            })
+        })
+    }
 
   getFormElementsData(): Observable<any>{
 
