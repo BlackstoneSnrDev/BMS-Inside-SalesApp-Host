@@ -60,7 +60,7 @@ import { KnobModule } from 'primeng/knob';
 import {AccordionModule} from 'primeng/accordion';
 import { FieldsetModule } from 'primeng/fieldset';
 import {FileUploadModule} from 'primeng/fileupload';
-
+import { ScrollTopModule } from 'primeng/scrolltop';
 
 
 @NgModule({
@@ -119,6 +119,7 @@ import {FileUploadModule} from 'primeng/fileupload';
     AccordionModule,
     CardModule,
     FileUploadModule,
+    ScrollTopModule,
   ],
 
   providers: [
