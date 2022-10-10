@@ -1,4 +1,7 @@
 import { Component } from "@angular/core";
+import { UsersService } from '../../services/auth.service';
+import { DataService } from '../../services/services.service';
+
 
 @Component({
 
@@ -9,5 +12,20 @@ import { Component } from "@angular/core";
 
 })
 export class HomeComponent {
+
+    constructor(
+        public DataService: DataService,
+        private usersService: UsersService
+      ) {}
+
+    ngOnInit() {
+        this.usersService.userInfo.subscribe((userInfo: any) => {
+            if (userInfo) {
+                console.log(userInfo.clients);
+                this.DataService.getClientList(userInfo.clients);
+            }
+        })
+        
+    }
   
 }
