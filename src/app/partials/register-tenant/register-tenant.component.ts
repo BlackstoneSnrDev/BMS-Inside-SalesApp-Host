@@ -5,16 +5,11 @@ import { DataService } from '../../services/services.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-<<<<<<< HEAD
-import { UsersService } from "../../services/auth.service";
-import { DataService } from "../../services/services.service";
-=======
 import {
   DomSanitizer,
   SafeResourceUrl,
   SafeUrl,
 } from '@angular/platform-browser';
->>>>>>> 94fcc8b38926b355f746c3997492c584498aa527
 
 @Component({
   selector: 'register-tenant-component',
@@ -40,9 +35,6 @@ export class RegisterTenant {
     private sanitizer: DomSanitizer
   ) {}
 
-<<<<<<< HEAD
-    constructor(public router: Router, public userService: UsersService, public dataService: DataService ) { }
-=======
   ngOnInit() {
     this.tenantForm = new FormGroup({
       tenantLogo: new FormControl('', [
@@ -62,8 +54,8 @@ export class RegisterTenant {
       ]),
       adminPassword: new FormControl('', [
         Validators.required,
-        Validators.minLength(8),
-        Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}'),
+        Validators.minLength(4),
+        //Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}'),
       ]),
       phoneNumber0: new FormControl('', [
         Validators.required,
@@ -71,16 +63,15 @@ export class RegisterTenant {
       ]),
     });
   }
->>>>>>> 94fcc8b38926b355f746c3997492c584498aa527
 
-  capStatus(e: KeyboardEvent) {
-    let value = this.tenantForm.touched;
-    if (value && e.getModifierState('CapsLock')) {
-      this.capsStatus = 'Caps lock is ON.';
-    } else {
-      this.capsStatus = 'Caps lock is OFF.';
-    }
-  }
+//   capStatus(e: KeyboardEvent) {
+//     let value = this.tenantForm.touched;
+//     if (value && e.getModifierState('CapsLock')) {
+//       this.capsStatus = 'Caps lock is ON.';
+//     } else {
+//       this.capsStatus = 'Caps lock is OFF.';
+//     }
+//   }
 
   clonePhoneField() {
     let id = this.items.length;
@@ -95,42 +86,9 @@ export class RegisterTenant {
   removeClonedPhoneField() {
     let id = this.items.length - 1;
 
-<<<<<<< HEAD
-    saveNewTenant() {
-
-
-        this.dataService.createNewTenant();
-
-    /*  
-    INITIAL ADMIN: 
-        create phone numbers in Twilio for new tenant 
-        (have the fake json numbers connect to twilio numbers to play recorded message)
-
-    INPUTS:
-        tenant name
-        tenant admin user - email and password
-        tenant's phone numbers 
-        twilio phone numbers for tenant 
-
-    IN DATABASE
-        create user in firebase auth
-        create tenant 
-        add admin uid to tenants uids array
-        add admin user to users collection
-        create initial template with just name, emails, and phone numbers 
-            create status 'active' and 'no active'
-
-    IN TENANT'S ACCOUNT PAGE
-        make roles 
-        create first template
-        create users
-    */
-        console.log('Saved')
-=======
     if (id > 0) {
       this.tenantForm.removeControl('phoneNumber' + id);
       this.items.pop();
->>>>>>> 94fcc8b38926b355f746c3997492c584498aa527
     }
   }
 
@@ -163,11 +121,13 @@ export class RegisterTenant {
   }
 
   saveNewTenant() {
+    console.log('save new tenant');
     console.log(this.tenantForm.value);
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Service Message',
-      detail: 'Tenant created successfully.',
-    });
+    //this.DataService.createNewTenant();
+    // this.messageService.add({
+    //   severity: 'success',
+    //   summary: 'Service Message',
+    //   detail: 'Tenant created successfully.',
+    // });
   }
 }

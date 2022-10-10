@@ -37,7 +37,7 @@
                 <mat-label>Tenant name</mat-label>
                 <input
                   matInput
-                  (keyup)="capStatus($event)"
+                
                   class="input-neumorphism"
                   type="text"
                   autocomplete="off"
@@ -52,7 +52,7 @@
                 <input
                   name="emailTenant"
                   matInput
-                  (keyup)="capStatus($event)"
+          
                   pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
                   class="input-neumorphism"
                   type="email"
@@ -61,7 +61,7 @@
                   formControlName="adminUsername"
                 />
               </mat-form-field>
-              <span
+              <!-- <span
                 *ngIf="tenantForm.get('adminUsername')?.hasError('pattern')"
                 class="validator-container"
               >
@@ -71,7 +71,7 @@
                   <i class="bi bi-exclamation-triangle margin-rt"></i>Use a
                   valid email address.</p
                 >
-              </span>
+              </span> -->
             </div>
             <div class="col-sm-4">
               <mat-form-field appearance="standard">
@@ -79,10 +79,10 @@
                 <input
                   name="passTenant"
                   matInput
-                  (keyup)="capStatus($event)"
+                  
                   class="input-neumorphism"
                   [type]="hide ? 'password' : 'text'"
-                  pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                 
                   placeholder="Ex. Password19"
                   autocomplete="new-password"
                   formControlName="adminPassword"
@@ -95,7 +95,7 @@
                   ></i>
                 </mat-icon>
               </mat-form-field>
-              <span
+              <!-- <span
                 *ngIf="tenantForm.get('adminPassword')?.hasError('pattern')"
                 class="validator-container"
               >
@@ -106,7 +106,7 @@
                   more characters with a mix of lowercase, upercase letters &
                   numbers.</p
                 >
-              </span>
+              </span> -->
             </div>
           </div>
 
@@ -149,13 +149,9 @@
             <button
               type="submit"
               value="save"
-              [disabled]="!tenantForm.valid"
+              
               class="width-50 btn-center"
-              [ngClass]="
-                !tenantForm.valid
-                  ? 'button-neumorphism-disabled'
-                  : 'button-neumorphism'
-              "
+              [ngClass]="'button-neumorphism'"
               (click)="saveNewTenant()"
             >
               Create
