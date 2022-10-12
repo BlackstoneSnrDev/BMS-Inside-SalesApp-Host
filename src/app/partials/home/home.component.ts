@@ -13,6 +13,8 @@ import { DataService } from '../../services/services.service';
 })
 export class HomeComponent {
 
+    public tenantList: any[] = [];
+
     constructor(
         public DataService: DataService,
         private usersService: UsersService
@@ -20,9 +22,12 @@ export class HomeComponent {
 
     ngOnInit() {
         this.usersService.userInfo.subscribe((userInfo: any) => {
-            if (userInfo) {
-                console.log(userInfo.clients);
-                this.DataService.getClientList(userInfo.clients);
+            if (userInfo && userInfo.clients) {
+                this.DataService.getClientList(userInfo.clients).then((res: any) => {
+                    console.log(res);
+                        this.tenantList = res;
+                    }
+                )
             }
         })
         

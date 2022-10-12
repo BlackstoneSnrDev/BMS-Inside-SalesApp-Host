@@ -56,6 +56,14 @@ export class DataService {
 
     createNewTenant() {
 
+//     IN DATABASE
+//         create user in firebase auth
+//         create tenant 
+//         add admin uid to tenants uids array
+//         add admin user to users collection
+//         create initial template with just name, emails, and phone numbers 
+//             create status 'active' and 'no active'
+
         let customers = this._http.get(this.initialTemplateCustomers);
         customers.subscribe((data) => {
             Object.values(data).forEach((customer) => {
@@ -66,13 +74,14 @@ export class DataService {
         
     }
 
-    getClientList(clientArray: any) {
-      
-        clientArray.forEach((client: string | undefined) => {
+    async getClientList(clientArray: any) {
+        let clientList: any[] = [];
+        await clientArray.forEach((client: string | undefined) => {
             this.afs.collection('Tenant').doc(client).ref.get().then((docs) => {
-                console.log(docs.data());
+                clientList.push(docs.data());
             })
         })
+        return clientList;
     }
 
   getFormElementsData(): Observable<any>{

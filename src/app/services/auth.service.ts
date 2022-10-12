@@ -34,9 +34,9 @@ export class UsersService {
 
   }
 
-  getCurrentUser() {
-    this.getUserData(this.userData?.uid)
-  }
+//   getCurrentUser() {
+//     this.getUserData(this.userData?.uid)
+//   }
 
   userData: any; // Save logged in user data
   
@@ -111,12 +111,20 @@ export class UsersService {
   }
 
     getUserData(uid: any) {
-        console.log(uid);
         const coachData = this.afs.collection('Coach').doc(uid).ref;
         coachData.get().then((res) => {
             let localUserInfo: any = res.data();
             this.user.next(localUserInfo);
-            console.log(localUserInfo);
+
+            // if (res.exists) {
+            //     let localUserInfo: any = res.data();
+            //     this.user.next(localUserInfo);
+            //     console.log(res.data());
+            // } else {
+            //     this.SignOut();
+            //     window.alert('This user is not a coach');
+            // }
+
         })
 
     }
