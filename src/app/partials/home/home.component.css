@@ -6,46 +6,43 @@
   min-width: 10rem;
 }
 
-::ng-deep.p-accordion-tab-active .p-toggleable-content:not(.ng-animating){
+::ng-deep.p-accordion-tab-active .p-toggleable-content:not(.ng-animating) {
   overflow: hidden !important;
 }
 
-.card-container{
+.card-container {
   padding: 1rem;
   margin: 1rem;
-      border: 0.0625rem solid #d1d9e6;
-    border-radius: 1rem;
-    box-shadow: inset 1px 1px 4px #b8b9be, inset -1px -1px 4px #b8b9be;
-    position: relative;
+  border: 0.0625rem solid #d1d9e6;
+  border-radius: 1rem;
+  box-shadow: inset 1px 1px 4px #b8b9be, inset -1px -1px 4px #b8b9be;
+  position: relative;
 }
 
-.card-icon{
+.card-icon {
   padding: 0.5rem;
-    border: 0.0625rem solid #d1d9e6;
-    border-radius: 0.5rem;
-    width: fit-content;
-    position: absolute;
-    left: -1rem;
-    
-    top: -0.7rem;
+  border: 0.0625rem solid #d1d9e6;
+  border-radius: 0.5rem;
+  width: fit-content;
+  position: absolute;
+  left: -1rem;
 
-    background: #e6e7ee;
-    box-shadow:  1px 1px 4px #fff, -1px -1px 4px #b8b9be;
-z-index: 1;
+  top: -0.7rem;
 
+  background: #e6e7ee;
+  box-shadow: 1px 1px 4px #fff, -1px -1px 4px #b8b9be;
+  z-index: 1;
 }
 
-.card-icon.template i{
+.card-icon.template i {
   font-size: 1rem;
-
 }
 
-.card-icon i{
+.card-icon i {
   font-size: 2rem;
-
 }
 
-.phone-icon-pad{
+.phone-icon-pad {
   background-image: url("../../../assets/img/callPad.png");
   height: 1.5rem;
   overflow: auto;
@@ -57,11 +54,11 @@ z-index: 1;
   display: inline-flex;
 }
 
-.phone-number{
+.phone-number {
   vertical-align: super;
 }
 
-.button-neumorphism{
+.button-neumorphism {
   position: relative;
 }
 
@@ -77,33 +74,30 @@ z-index: 1;
   display: none;
 }
 
-.button-neumorphism:hover .btn-arrow{
+.button-neumorphism:hover .btn-arrow {
   background: #e0e1e9;
-
 }
 
-.button-neumorphism-active .btn-arrow{
+.button-neumorphism-active .btn-arrow {
   background: #f1f2f4;
-
 }
 
-.button-neumorphism-active:hover .btn-arrow{
+.button-neumorphism-active:hover .btn-arrow {
   background: #f1f2f4 !important;
-
 }
 
-.button-neumorphism-active .btn-arrow, .button-neumorphism-active .btn-arrow-border{
+.button-neumorphism-active .btn-arrow,
+.button-neumorphism-active .btn-arrow-border {
   display: block;
-
 }
 .btn-arrow {
   width: 40px;
-    height: 40px;
-    background: #e6e7ee;
-    clip-path: polygon(100% 50%, 30% 50%, 65% 78%);
-    position: absolute;
-    top: 1.12rem;
-    left: 0rem;
-    z-index: 1;
-    display: none;
+  height: 40px;
+  background: #e6e7ee;
+  clip-path: polygon(100% 50%, 30% 50%, 65% 78%);
+  position: absolute;
+  top: 1.12rem;
+  left: 0rem;
+  z-index: 1;
+  display: none;
 }

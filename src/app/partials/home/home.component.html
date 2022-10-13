@@ -4,59 +4,94 @@
     <hr />
     <br />
     <div *ngIf="tenantList">
-        <!-- <tenant-component [tenantInfo]="tenantList"></tenant-component> -->
-        <p-accordion [activeIndex]="indexAcc" (onOpen)="onTabOpen(0)" *ngFor="let tenant of tenantList; let index = index" >
-          <p-accordionTab header="{{ tenant.tenantName }}">
-            <button class="button-neumorphism margin-bt margin-rt" id="menuTenant{{index}}{{  indexTab }}"
-              (click)="showContent(index, title.field, indexTab)"
-              *ngFor="let title of tenantTitles; let indexTab = index">
-              {{ title.label | formatLabel }}
-              <span class="btn-arrow-border"></span>
-              <span class="btn-arrow"></span>
-            </button>
-            
-            <div *ngIf="!tenantContent && currentItem">
-              <b class="margin-lt">There are not records to show.</b> 
+      <!-- <tenant-component [tenantInfo]="tenantList"></tenant-component> -->
+      <p-accordion
+        [activeIndex]="indexAcc"
+        (onOpen)="onTabOpen(0)"
+        *ngFor="let tenant of tenantList; let index = index"
+      >
+        <p-accordionTab header="{{ tenant.tenantName }}">
+          <button
+            class="button-neumorphism margin-bt margin-rt"
+            id="menuTenant{{ index }}{{ indexTab }}"
+            (click)="showContent(index, title.field, indexTab)"
+            *ngFor="let title of tenantTitles; let indexTab = index"
+          >
+            {{ title.label | formatLabel }}
+            <span class="btn-arrow-border"></span>
+            <span class="btn-arrow"></span>
+          </button>
+
+          <div *ngIf="!tenantContent && currentItem">
+            <b class="margin-lt">There are not records to show.</b>
+          </div>
+          <div class="card-container" *ngIf="tenantContent">
+            <div
+              class="card-icon"
+              [ngClass]="currentItem === 'templates' ? 'template' : ''"
+            >
+              <i
+                class="bi bi-columns-gap"
+                *ngIf="currentItem === 'templates'"
+              ></i>
+              <i class="bi bi-people-fill" *ngIf="currentItem === 'users'"></i>
+              <i
+                class="bi bi-person-badge-fill"
+                *ngIf="currentItem === 'roles'"
+              ></i>
+              <i
+                class="bi bi-journal-text"
+                *ngIf="currentItem === 'phoneNumbers'"
+              ></i>
             </div>
-            <div class="card-container" *ngIf="tenantContent">
-              <div class="card-icon" [ngClass]="currentItem === 'templates' ? 'template' : ''">
-                <i class="bi bi-columns-gap" *ngIf="currentItem === 'templates'"></i>
-                <i class="bi bi-people-fill" *ngIf="currentItem === 'users'"></i>
-                <i class="bi bi-person-badge-fill" *ngIf="currentItem === 'roles'"></i>
-                <i class="bi bi-journal-text" *ngIf="currentItem === 'phoneNumbers'"></i>
-              </div>
 
-              <ng-container
-                [ngSwitch]="currentItem === 'phoneNumbers' ? 'phone-list' : currentItem === 'templates' ? 'templates' : -1">
-                <ng-container *ngSwitchCase="'phone-list'">
-                  <div class="row">
-                    <div class="col-lg-6" *ngFor="let content of tenantContent"> 
-                      <div class="phone-icon-pad"></div><span class="phone-number">{{ content }}</span>
-                    </div>
+            <ng-container
+              [ngSwitch]="
+                currentItem === 'phoneNumbers'
+                  ? 'phone-list'
+                  : currentItem === 'templates'
+                  ? 'templates'
+                  : -1
+              "
+            >
+              <ng-container *ngSwitchCase="'phone-list'">
+                <div class="row">
+                  <div class="col-lg-6" *ngFor="let content of tenantContent">
+                    <div class="phone-icon-pad"></div>
+                    <span class="phone-number">{{ content }}</span>
                   </div>
-                </ng-container>
-
-                <ng-container *ngSwitchCase="'templates'">
-                  <div *ngFor="let content of tenantContent">
-                    <p-accordion *ngIf="content">
-                      <p-accordionTab header="{{ content.templateName }}">
-                        <table-component [thData]="thData" [tdData]="content" [currentItem]="currentItem">
-                        </table-component>
-                      </p-accordionTab>
-                    </p-accordion>
-                  </div>
-                </ng-container>
-
-                <ng-container *ngSwitchDefault>
-                  <div *ngIf="tenantContent">
-                    <table-component [thData]="thData" [tdData]="tenantContent" [currentItem]="currentItem">
-                    </table-component>
-                  </div>
-                </ng-container>
+                </div>
               </ng-container>
-            </div>
-          </p-accordionTab>
-        </p-accordion>
-      </div>
+
+              <ng-container *ngSwitchCase="'templates'">
+                <div *ngFor="let content of tenantContent">
+                  <p-accordion *ngIf="content">
+                    <p-accordionTab header="{{ content.templateName }}">
+                      <table-component
+                        [thData]="thData"
+                        [tdData]="content"
+                        [currentItem]="currentItem"
+                      >
+                      </table-component>
+                    </p-accordionTab>
+                  </p-accordion>
+                </div>
+              </ng-container>
+
+              <ng-container *ngSwitchDefault>
+                <div *ngIf="tenantContent">
+                  <table-component
+                    [thData]="thData"
+                    [tdData]="tenantContent"
+                    [currentItem]="currentItem"
+                  >
+                  </table-component>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
     </div>
+  </div>
 </div>

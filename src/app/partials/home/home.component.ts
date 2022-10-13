@@ -5,10 +5,7 @@ import { DataService } from '../../services/services.service';
 @Component({
   selector: 'home-component',
   templateUrl: './home.component.html',
-  styleUrls: [
-    './home.component.css',
-    '../../css/neumorphism.component.css'
-  ],
+  styleUrls: ['./home.component.css', '../../css/neumorphism.component.css'],
 })
 export class HomeComponent {
   public tenantList: any[] = [];
@@ -22,6 +19,7 @@ export class HomeComponent {
   public loading: boolean = true;
   indexAcc: any;
   lastIndex = -1;
+  
   constructor(
     public dataService: DataService,
     private usersService: UsersService
