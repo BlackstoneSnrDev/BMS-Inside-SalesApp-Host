@@ -12,8 +12,6 @@ export class AppComponent {
     title = 'inside_sales_host';
 
     constructor() {
-
-        console.log("Constructor Executed");
     }
 
 }

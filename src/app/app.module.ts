@@ -10,6 +10,8 @@ import {CardModule} from 'primeng/card';
 ///// My components 
 // HTML
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { TenantComponent } from './components/tenant/tenant.component';
+import { TableComponent } from './components/table/table.component';
 
 ///// Partials
 import { LoginComponent } from './partials/login/login.component';
@@ -25,6 +27,9 @@ import { AuthGuard } from "./services/auth.guard";
 ///// My pipes
 import { FormatBoolean } from './pipes/formatBoolean.pipe';
 import { ChangeView } from './pipes/changeView.pipe';
+import { ObjectToArray } from './pipes/objectToArray.pipe';
+import { FormatLabel } from './pipes/formatLabel.pipe';
+
 ///// Libraries
 // Angular material
 import { MatInputModule } from '@angular/material/input';
@@ -58,10 +63,10 @@ import { ToastModule } from 'primeng/toast';
 import { DropdownModule } from 'primeng/dropdown';
 import { KnobModule } from 'primeng/knob';
 import {AccordionModule} from 'primeng/accordion';
-import { FieldsetModule } from 'primeng/fieldset';
 import {FileUploadModule} from 'primeng/fileupload';
 import { ScrollTopModule } from 'primeng/scrolltop';
-
+import {TabMenuModule} from 'primeng/tabmenu';
+import {OrganizationChartModule} from 'primeng/organizationchart';
 
 @NgModule({
 
@@ -70,6 +75,8 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     ///// My components 
     // HTML
     NavbarComponent,
+    TenantComponent,
+    TableComponent,
     // Partials
     LoginComponent,
     PageNotFoundComponent,
@@ -80,6 +87,8 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 ///// My pipes
     FormatBoolean,
     ChangeView,
+    ObjectToArray,
+    FormatLabel,
   ],
 
   imports: [
@@ -115,11 +124,12 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     ToastModule,
     DropdownModule,
     KnobModule,
-    FieldsetModule,
     AccordionModule,
     CardModule,
     FileUploadModule,
     ScrollTopModule,
+    TabMenuModule,
+    OrganizationChartModule,
   ],
 
   providers: [

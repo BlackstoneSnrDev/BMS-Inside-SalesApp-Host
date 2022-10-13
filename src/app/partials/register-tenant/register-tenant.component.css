@@ -200,7 +200,7 @@
 .logo-img.validator-container {
   top: -1rem;
   left: 8.4rem;
-  width: 8rem;
+  width: fit-content;
   padding: 0.4rem 1rem 0.4rem 1rem;
 }
 

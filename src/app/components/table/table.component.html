@@ -1,0 +1,79 @@
+<p-table
+  #dataTable
+  [columns]="thData"
+  [value]="tdData | changeView: currentItem | objectToArray"
+  [rows]="5"
+  [paginator]="true"
+  [rowsPerPageOptions]="[5, 10, 25, 50]"
+  [rowHover]="true"
+  dataKey="slIndex"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [showCurrentPageReport]="true"
+  s
+  [loading]="loading"
+  styleClass="p-datatable-gridlines"
+  scrollHeight="42.857rem"
+  scrollDirection="horizontal"
+  responsiveLayout="scroll"
+  [tableStyle]="{ width: '100%' }"
+>
+  <ng-template pTemplate="caption">
+    <div
+      class="filter-container"
+      [ngClass]="filterInput.value ? 'filter-active' : ''"
+    >
+      <mat-form-field appearance="standard">
+        <mat-label>Search record</mat-label>
+        <input
+          matInput
+          type="text"
+          [value]="$any(dataTable).filters['global']?.value"
+          #filterInput
+          (keyup)="dataTable.filterGlobal(filterInput.value, 'contains')"
+          placeholder="Ex. ium"
+        />
+      </mat-form-field>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" pSortableColumn="{{ col.field }}">
+        {{ col.title }}<p-sortIcon field="{{ col.field }}"></p-sortIcon>
+        <p-columnFilter
+          type="text"
+          field="{{ col.field }}"
+          display="menu"
+        ></p-columnFilter>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-rowData
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <tr [pEditableRow]="rowData" id="tr{{ rowIndex }}">
+      <td *ngFor="let col of columns">
+        {{ rowData[col.field] }}
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="paginatorleft">
+    <p-button
+      type="button"
+      icon="pi pi-plus"
+      styleClass="p-button-text"
+    ></p-button>
+  </ng-template>
+  <ng-template pTemplate="paginatorright">
+    <p-button
+      type="button"
+      icon="pi pi-cloud"
+      styleClass="p-button-text"
+    ></p-button>
+  </ng-template>
+</p-table>

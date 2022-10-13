@@ -67,10 +67,12 @@
 .logo {
   width: 15rem;
   height: 15rem;
+  border-radius: 100%;
 }
 
 .logo-container {
   text-align: center;
+  height: 15rem;
 }
 
 .loginForm {

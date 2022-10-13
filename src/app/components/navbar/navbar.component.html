@@ -25,37 +25,36 @@
 
   <div class="partialsContainer">
     <ul class="ul-my-navbar">
-        <li class="my-navbar-tab-container" *ngIf="isLoggedIn">
-            <div class="dropdown">
-                <div class="my-navbar-tab " routerLinkActive="active-tab">
-                    <a class="a-my-navbar">
-                        <i class="bi bi-person-circle i-my-navbar"></i>
-                    </a>
-                    <!-- <div class="txt-my-navbar" matTooltip="{{userInfo.tenant}}" matTooltipPosition="right" >
-                        {{userInfo.name}}
-                    </div> -->
-                </div>
-                <div class="dropdown-content">
-                    <div class="my-navbar-tab" matTooltip="Log out" matTooltipPosition="right">
-                        <a class="a-my-navbar" (click)="onLogout()">
-                            <i class="bi bi-box-arrow-left i-my-navbar"></i>
-                        </a>
-                    </div>
-
-            </div>
-            <div class="dropdown-content">
-              <div
-                class="my-navbar-tab"
-                matTooltip="Log out"
-                matTooltipPosition="right"
-              >
-                <a class="a-my-navbar" (click)="onLogout()">
-                  <i class="bi bi-box-arrow-left i-my-navbar"></i>
-                </a>
-              </div>
+      <li class="my-navbar-tab-container" *ngIf="isLoggedIn">
+        <div class="dropdown">
+          <div class="my-navbar-tab" routerLinkActive="active-tab">
+            <a class="a-my-navbar">
+              <i class="bi bi-person-circle i-my-navbar"></i>
+            </a>
+          </div>
+          <div class="dropdown-content">
+            <div
+              class="my-navbar-tab"
+              matTooltip="Log out"
+              matTooltipPosition="right"
+            >
+              <a class="a-my-navbar" (click)="onLogout()">
+                <i class="bi bi-box-arrow-left i-my-navbar"></i>
+              </a>
             </div>
           </div>
-
+          <div class="dropdown-content">
+            <div
+              class="my-navbar-tab"
+              matTooltip="Log out"
+              matTooltipPosition="right"
+            >
+              <a class="a-my-navbar" (click)="onLogout()">
+                <i class="bi bi-box-arrow-left i-my-navbar"></i>
+              </a>
+            </div>
+          </div>
+        </div>
       </li>
       <li class="my-navbar-tab-container" *ngFor="let tab of navbartabs">
         <div

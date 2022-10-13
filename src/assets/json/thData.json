@@ -1,0 +1,56 @@
+{"tableTemplate_th": [
+    {
+      "title": "Name",
+      "field": "name",
+      "element_type": "text"
+    },
+    {
+      "title": "Type",
+      "field": "type",
+      "element_type": "text"
+    },
+    {
+      "title": "Visible",
+      "field": "visible",
+      "element_type": "boolean"
+    }
+  ],
+  "tableUser_th": [
+    {
+      "title": "Name",
+      "field": "name",
+      "element_type": "text"
+    },
+    {
+      "title": "Username",
+      "field": "username",
+      "element_type": "text"
+    },
+    {
+      "title": "Department",
+      "field": "department",
+      "element_type": "text"
+    },
+    {
+      "title": "Role",
+      "field": "roles",
+      "element_type": "text"
+    },
+    {
+      "title": "Active Template",
+      "field": "activeTemplate",
+      "element_type": "text"
+    }
+  ],
+  "tableRole_th": [
+    {
+      "title": "Name",
+      "field": "name",
+      "element_type": "text"
+    }
+  ],
+  "tenantTitles":[
+    {"label": "Templates", "field": "templates"}, {"label": "Users", "field": "users"}, {"label": "Roles", "field": "roles"}, {"label": "Phone numbers", "field": "phoneNumbers"}
+  ]
+}
+  

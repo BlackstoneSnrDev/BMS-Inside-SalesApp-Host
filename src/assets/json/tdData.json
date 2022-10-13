@@ -1,0 +1,252 @@
+{"tableTemplate_td": [ 
+  {
+    "templateName": "NEW",
+    "templateStatus": false,
+    "templateFields": [
+      {
+        "name": "Phone Number",
+        "type": "number",
+        "visible": true,
+        "slIndex": 0
+      },
+      {
+        "name": "New one",
+        "type": "address",
+        "visible": false,
+        "slIndex": 1
+      }
+    ],
+    "statuses": []
+  },
+  {
+    "templateName": "New Template",
+    "templateStatus": false,
+    "templateFields": [
+      {
+        "name": "Test One",
+        "type": "text",
+        "visible": true,
+        "slIndex": 2
+      },
+      {
+        "name": "Test Two",
+        "type": "number",
+        "visible": true,
+        "slIndex": 3
+      }
+    ],
+    "statuses": []
+  },
+  {
+    "templateName": "Template Ktest",
+    "templateStatus": false,
+    "templateFields": [
+      {
+        "name": "MRN",
+        "type": "text",
+        "visible": true,
+        "slIndex": 4
+      },
+      {
+        "name": "Pending",
+        "type": "boolean",
+        "visible": true,
+        "slIndex": 5
+      },
+      {
+        "name": "Full Name",
+        "type": "text",
+        "visible": true,
+        "slIndex": 6
+      },
+      {
+        "name": "Work address",
+        "type": "address",
+        "visible": true,
+        "slIndex": 7
+      },
+      {
+        "name": "DOB",
+        "type": "date",
+        "visible": true,
+        "slIndex": 8
+      },
+      {
+        "name": "Phone number",
+        "type": "number",
+        "visible": true,
+        "slIndex": 9
+      },
+      {
+        "name": "Prior Contact",
+        "type": "boolean",
+        "visible": true,
+        "slIndex": 10
+      }
+    ],
+    "statuses": []
+  },
+  {
+    "templateName": "Template One",
+    "templateStatus": true,
+    "templateFields": [
+      {
+        "name": "Pending",
+        "type": "boolean",
+        "visible": true,
+        "slIndex": 11
+      },
+      {
+        "name": "MRN",
+        "type": "text",
+        "visible": false,
+        "slIndex": 12
+      },
+      {
+        "name": "Address",
+        "type": "text",
+        "visible": true,
+        "slIndex": 13
+      },
+      {
+        "name": "Email Address",
+        "type": "text",
+        "visible": true,
+        "slIndex": 14
+      },
+      {
+        "name": "Full Name",
+        "type": "text",
+        "visible": true,
+        "slIndex": 15
+      },
+      {
+        "name": "Prior Contact",
+        "type": "boolean",
+        "visible": false,
+        "slIndex": 16
+      },
+      {
+        "name": "DOB",
+        "type": "text",
+        "visible": false,
+        "slIndex": 17
+      },
+      {
+        "name": "Phone Number",
+        "type": "number",
+        "visible": true,
+        "slIndex": 18
+      },
+      {
+        "name": "Balance",
+        "type": "number",
+        "visible": true,
+        "slIndex": 19
+      }
+    ],
+    "statuses": []
+  },
+  {
+    "templateName": "Test",
+    "templateStatus": false,
+    "templateFields": [
+      {
+        "name": "Field 1",
+        "type": "date",
+        "visible": false,
+        "slIndex": 20
+      },
+      {
+        "name": "Phone Number",
+        "type": "number",
+        "visible": true,
+        "slIndex": 21
+      },
+      {
+        "name": "Field 2",
+        "type": "text",
+        "visible": true,
+        "slIndex": 22
+      }
+    ],
+    "statuses": []
+  },
+  {
+    "templateName": "Testing",
+    "templateStatus": false,
+    "templateFields": [
+      {
+        "name": "TE",
+        "type": "number",
+        "visible": true,
+        "slIndex": 23
+      },
+      {
+        "name": "ST",
+        "type": "address",
+        "visible": false,
+        "slIndex": 24
+      },
+      {
+        "name": "NG",
+        "type": "date",
+        "visible": false,
+        "slIndex": 25
+      },
+      {
+        "name": "TI",
+        "type": "email",
+        "visible": true,
+        "slIndex": 26
+      }
+    ],
+    "statuses": []
+  }
+],
+  "tableUser_td": [
+    {
+        "email": "name@example.com",
+        "activeTemplate": "Template One",
+        "username": "User Name",
+        "tenant": "Template One",
+        "uid": "YzVi9YC7QWTGSjazOeyQHNqgSua2",
+        "roles": [],
+        "admin": false,
+        "name": "User Name",
+        "department": "test",
+        "slIndex": 0
+    },
+    {
+        "activeGroup": [],
+        "activeTemplate": "Template One",
+        "role": [],
+        "uid": "eckKB7Fi2pXCVvEP5DbN34wYy5m2",
+        "name": "Ryan Rieben",
+        "tenant": "First Tenant",
+        "email": "ryanr1423@yahoo.com",
+        "department": "Inside Sales",
+        "admin": true,
+        "username": "ryanr1423@yahoo.com",
+        "slIndex": 1
+    },
+    {
+        "activeTemplate": "New Template",
+        "uid": "fVmMALLBzQRbrADuTwCjIoSFT5R2",
+        "admin": true,
+        "activeGroup": [],
+        "email": "testusertwo@test.com",
+        "role": [],
+        "department": "Inside Sales",
+        "username": "testusertwo@test.com",
+        "name": "Second User",
+        "tenant": "First Tenant",
+        "slIndex": 2
+    }
+],
+  "tableRole_td": [{"name":"Admin","permissions":["Toggle autodialer","Activate template"],"slIndex":0},{"name":"Lead","permissions":["Create new template","Activate template"],"slIndex":1},{"name":"Trainer","permissions":["Activate template"],"slIndex":2}],
+  "tenantTitles":[
+    {"label": "Templates", "field": "templates"}, {"label": "Users", "field": "users"}, {"label": "Roles", "field": "roles"}, {"label": "Phone numbers", "field": "phoneNumbers"}
+  ]
+}
+  
