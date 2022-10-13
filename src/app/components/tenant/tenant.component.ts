@@ -1,34 +1,51 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { UsersService } from '../../services/auth.service';
+import { Component, Input } from '@angular/core';
 import { DataService } from '../../services/services.service';
 
-
 @Component({
-
-    selector: 'tenant-component',
-    templateUrl: './tenant.component.html',
-    styleUrls: ['./tenant.component.css',
-    '../../css/neumorphism.component.css',]
-
+  selector: 'tenant-component',
+  templateUrl: './tenant.component.html',
+  styleUrls: ['./tenant.component.css', '../../css/neumorphism.component.css'],
 })
+
 export class TenantComponent {
+  @Input() tenantInfo: any;
 
-    @Input() tenantInfo: any;
-    public tenantLists: any
+  public tenantTitles: any;
+  public tenantContent: any;
+  public currentItem: any;
 
-    constructor(
-        public DataService: DataService,
-        private usersService: UsersService
-      ) {}
+  public indexAccordion: any;
+  public lastIndexAcc = -1;
 
-    ngOnInit() {
-        for (const [i, value] of this.tenantInfo.entries()) {
-            this.tenantLists = value.tenantName;
-        }
-       
-        console.log(this.tenantLists)
-        
-        
+  constructor(public DataService: DataService) {}
+
+  ngOnInit() {}
+
+  onTabOpen(index: number) {
+    this.indexAccordion = this.lastIndexAcc--;
+
+    this.tenantInfo.forEach((array: any, i: any) => {
+      if (index == i) {
+        this.tenantTitles = Object.keys(array);
+      }
+    });
+
+    console.log(this.tenantTitles);
+  }
+
+  showContent(index: number, tabName: any, elementId: number) {
+    this.currentItem = tabName;
+    
+    let tenant = this.tenantInfo.filter((array: any, i: any) => i == index);
+    this.tenantContent = tenant[0][tabName];
+    console.log(this.tenantContent);
+
+    let modifyLastElmActive = document.getElementsByClassName(
+      'button-neumorphism-active'
+    );
+    while (modifyLastElmActive.length > 0) {
+      modifyLastElmActive[0].classList.remove('button-neumorphism-active');
     }
-  
+    document.getElementById('menuTenant' + index + elementId)?.classList.toggle('button-neumorphism-active');
+  }
 }

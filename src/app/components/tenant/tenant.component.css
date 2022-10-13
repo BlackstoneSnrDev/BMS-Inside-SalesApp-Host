@@ -3,4 +3,60 @@
     margin-right: 1rem;
     margin-top: 2.5rem;
     height: 57rem;
+    min-width: 10rem
 }
+
+.card-container {
+    padding: 1rem;
+    margin: 1rem;
+    border: 0.0625rem solid #d1d9e6;
+    border-radius: 1rem;
+    box-shadow: inset 1px 1px 4px #b8b9be, inset -1px -1px 4px #b8b9be;
+    position: relative;
+  }
+
+  .button-neumorphism {
+    position: relative;
+    min-width: 4rem;
+  }
+  
+  .btn-arrow-border {
+    width: 40px;
+    height: 42px;
+    background: #d1d9e6;
+    clip-path: polygon(100% 50%, 30% 50%, 65% 78%);
+    position: absolute;
+    top: 1.12rem;
+    left: 0rem;
+    z-index: 0;
+    display: none;
+  }
+  
+  .button-neumorphism:hover .btn-arrow {
+    background: #e0e1e9;
+  }
+  
+  .button-neumorphism-active .btn-arrow {
+    background: #f1f2f4;
+  }
+  
+  .button-neumorphism-active:hover .btn-arrow {
+    background: #f1f2f4 !important;
+  }
+  
+  .button-neumorphism-active .btn-arrow,
+  .button-neumorphism-active .btn-arrow-border {
+    display: block;
+  }
+  .btn-arrow {
+    width: 40px;
+    height: 40px;
+    background: #e6e7ee;
+    clip-path: polygon(100% 50%, 30% 50%, 65% 78%);
+    position: absolute;
+    top: 1.12rem;
+    left: 0rem;
+    z-index: 1;
+    display: none;
+  }
+  

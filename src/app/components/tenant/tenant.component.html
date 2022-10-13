@@ -1,5 +1,23 @@
-<p-accordion>
-  <p-accordionTab header="" [selected]="true" >
-     
+<p-accordion
+  [activeIndex]="indexAccordion"
+  (onOpen)="onTabOpen(0)"
+  *ngFor="let tenant of tenantInfo; let index = index"
+>
+  <p-accordionTab header="{{ tenant.tenantName }}">
+    <button
+      class="button-neumorphism margin-bt margin-rt"
+      id="menuTenant{{ index }}{{ indexTab }}"
+      (click)="showContent(index, title, indexTab)"
+      *ngFor="let title of tenantTitles; let indexTab = index"
+    >
+      {{ title | formatLabel }}
+      <span class="btn-arrow-border"></span>
+      <span class="btn-arrow"></span>
+    </button>
+
+    <div class="card-container" *ngIf="tenantContent">
+      {{ tenantContent | json }}
+    </div>
+
   </p-accordionTab>
 </p-accordion>
