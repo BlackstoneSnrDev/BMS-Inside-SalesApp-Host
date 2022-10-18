@@ -123,7 +123,7 @@ export class RegisterTenant {
   saveNewTenant() {
     console.log('save new tenant');
     console.log(this.tenantForm.value);
-    //this.DataService.createNewTenant();
+    this.DataService.createNewTenant(this.tenantForm.value.adminUsername, this.tenantForm.value.adminPassword, this.tenantForm.value.tenantName);
     this.messageService.add({
       severity: 'success',
       summary: 'Service Message',
