@@ -86,7 +86,7 @@ export class UsersService {
     const coachData = this.afs.collection('Coach').doc(uid).ref;
     coachData.get().then((res) => {
       let localUserInfo: any = res.data();
-      this.user.next(localUserInfo);
+      this.user.next({...localUserInfo, uid: uid});
 
       // if (res.exists) {
       //     let localUserInfo: any = res.data();
