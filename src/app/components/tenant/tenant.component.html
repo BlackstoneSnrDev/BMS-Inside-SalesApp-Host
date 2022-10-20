@@ -1,6 +1,6 @@
 <p-accordion
   [activeIndex]="indexAccordion"
-  (onOpen)="onTabOpen(0)"
+  (onOpen)="onTabOpen(index)"
   *ngFor="let tenant of tenantInfo; let index = index"
 >
   <p-accordionTab header="{{ tenant.tenantName }}">
@@ -18,6 +18,5 @@
     <div class="card-container" *ngIf="tenantContent">
       {{ tenantContent | json }}
     </div>
-
   </p-accordionTab>
 </p-accordion>

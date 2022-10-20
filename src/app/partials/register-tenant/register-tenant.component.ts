@@ -21,12 +21,14 @@ import {
 })
 export class RegisterTenant {
   public tenantForm!: FormGroup;
-  public hide: boolean = true;
+  public hide: boolean = false;
+  public coach: any;
 
   public capsStatus: any;
   public items: number[] = [1];
   public uploadedImg: any[] = [];
   public blobURLImg: any;
+  public phoneList: any[] = [0];
 
   constructor(
     private DataService: DataService,
@@ -37,7 +39,11 @@ export class RegisterTenant {
 
   ngOnInit() {
     this.tenantForm = new FormGroup({
-      tenantLogo: new FormControl('', [
+      tenantLogo: new FormControl('defaultVortexLogo', [
+        Validators.required,
+        Validators.minLength(1),
+      ]),
+      tenantCoach: new FormControl('', [
         Validators.required,
         Validators.minLength(1),
       ]),
@@ -45,7 +51,12 @@ export class RegisterTenant {
         Validators.required,
         Validators.minLength(1),
       ]),
+
       adminUsername: new FormControl('', [
+        Validators.required,
+        Validators.minLength(1),
+      ]),
+      adminEmail: new FormControl('', [
         Validators.required,
         Validators.minLength(1),
         Validators.pattern(
@@ -54,41 +65,69 @@ export class RegisterTenant {
       ]),
       adminPassword: new FormControl('', [
         Validators.required,
-        Validators.minLength(4),
-        //Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}'),
+        Validators.minLength(8),
       ]),
       phoneNumber0: new FormControl('', [
         Validators.required,
         Validators.minLength(1),
+        Validators.pattern('[1-9]{1}[0-9]{9}'),
       ]),
     });
-  }
 
-//   capStatus(e: KeyboardEvent) {
-//     let value = this.tenantForm.touched;
-//     if (value && e.getModifierState('CapsLock')) {
-//       this.capsStatus = 'Caps lock is ON.';
-//     } else {
-//       this.capsStatus = 'Caps lock is OFF.';
-//     }
-//   }
+    this.DataService.getMyTDData().subscribe(
+      (response) => {
+        this.coach = response.selectCoach;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 
   clonePhoneField() {
     let id = this.items.length;
-    this.tenantForm.addControl(
-      'phoneNumber' + id,
-      new FormControl('', [Validators.required, Validators.minLength(1)])
-    );
+    let valLast = id - 1;
 
-    this.items.push(id);
+    if (this.tenantForm.get('phoneNumber' + valLast)?.value) {
+      this.items.push(id);
+      this.tenantForm.addControl(
+        'phoneNumber' + id,
+        new FormControl('', [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.pattern('[1-9]{1}[0-9]{9}'),
+        ])
+      );
+
+      this.phoneList.push(this.tenantForm.get('phoneNumber' + valLast)?.value);
+      console.log(this.tenantForm);
+      this.hide = false;
+    } else {
+      this.hide = true;
+      setTimeout(() => {
+        this.hide = false;
+      }, 5000);
+    }
   }
 
-  removeClonedPhoneField() {
+  removeClonedPhoneField(indexSection: any) {
     let id = this.items.length - 1;
 
     if (id > 0) {
       this.tenantForm.removeControl('phoneNumber' + id);
-      this.items.pop();
+      this.items.splice(indexSection, 1);
+      this.phoneList.splice(indexSection, 1);
+    }
+  }
+
+  phoneEdited(indexSection: any) {
+    let val = this.tenantForm.get('phoneNumber' + indexSection)?.value;
+    if (this.phoneList[indexSection]) {
+      this.phoneList[indexSection] = val;
+      console.log(this.tenantForm);
+    } else {
+      this.phoneList[indexSection] = val;
+      console.log(this.tenantForm);
     }
   }
 
@@ -121,13 +160,17 @@ export class RegisterTenant {
   }
 
   saveNewTenant() {
-    console.log('save new tenant');
     console.log(this.tenantForm.value);
+    console.log(this.phoneList);
     this.DataService.createNewTenant(this.tenantForm.value.adminUsername, this.tenantForm.value.adminPassword, this.tenantForm.value.tenantName);
     this.messageService.add({
       severity: 'success',
       summary: 'Service Message',
-      detail: 'Tenant created successfully.',
+      detail: 'Tenant was created successfully.',
     });
+    this.tenantForm.reset()
+    this.tenantForm.patchValue({
+      tenantLogo: 'defaultVortexLogo'
+    })
   }
 }

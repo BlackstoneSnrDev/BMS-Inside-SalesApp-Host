@@ -1,5 +1,5 @@
 <div class="row main-row">
-  <div class="col-sm-12 d-flex">
+  <div class="col-sm-12">
     <form [formGroup]="tenantForm" *ngIf="tenantForm" class="tenantForm">
       <h1 class="padding-bt margin-bt">Create tenant user</h1>
       <div class="row form-container">
@@ -23,21 +23,25 @@
               <span class="logo-container-size" id="blobImg"></span>
             </ng-template>
           </p-fileUpload>
-          <span
-            *ngIf="tenantForm.get('tenantLogo')?.hasError('required')"
-            class="logo-img validator-container"
-          >
-            <i class="bi bi-exclamation-triangle margin-rt"></i> Select logo.
-          </span>
         </div>
         <div class="col-lg-8 form-tenant-container">
           <div class="form-row">
+            <div class="col-sm-4">
+              <p-dropdown
+                [options]="coach"
+                [filter]="true"
+                class="button-neumorphism"
+                formControlName="tenantCoach"
+                placeholder="Coach"
+                optionLabel="name"
+                optionValue="slcIndex"
+              ></p-dropdown>
+            </div>
             <div class="col-sm-4">
               <mat-form-field appearance="standard">
                 <mat-label>Tenant name</mat-label>
                 <input
                   matInput
-                
                   class="input-neumorphism"
                   type="text"
                   autocomplete="off"
@@ -48,41 +52,52 @@
             </div>
             <div class="col-sm-4">
               <mat-form-field appearance="standard">
+                <mat-label>Admin username</mat-label>
+                <input
+                  matInput
+                  class="input-neumorphism"
+                  type="text"
+                  autocomplete="off"
+                  formControlName="adminUsername"
+                  placeholder="Admin username"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-sm-6">
+              <mat-form-field appearance="standard">
                 <mat-label>Admin email</mat-label>
                 <input
                   name="emailTenant"
                   matInput
-          
                   pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
                   class="input-neumorphism"
                   type="email"
                   placeholder="Ex. bms@bms.com"
                   autocomplete="new-password"
-                  formControlName="adminUsername"
+                  formControlName="adminEmail"
                 />
               </mat-form-field>
-              <!-- <span
-                *ngIf="tenantForm.get('adminUsername')?.hasError('pattern')"
+              <span
+                *ngIf="tenantForm.get('adminEmail')?.hasError('pattern')"
                 class="validator-container"
               >
-                {{ capsStatus }}
-                <br />
                 <p class="inside-validator">
                   <i class="bi bi-exclamation-triangle margin-rt"></i>Use a
-                  valid email address.</p
-                >
-              </span> -->
+                  valid email address.
+                </p>
+              </span>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
               <mat-form-field appearance="standard">
                 <mat-label>Admin password</mat-label>
                 <input
                   name="passTenant"
                   matInput
-                  
                   class="input-neumorphism"
                   [type]="hide ? 'password' : 'text'"
-                 
                   placeholder="Ex. Password19"
                   autocomplete="new-password"
                   formControlName="adminPassword"
@@ -95,31 +110,32 @@
                   ></i>
                 </mat-icon>
               </mat-form-field>
-              <!-- <span
-                *ngIf="tenantForm.get('adminPassword')?.hasError('pattern')"
+              <span
+                *ngIf="tenantForm.get('adminPassword')?.hasError('minlength')"
                 class="validator-container"
               >
-                {{ capsStatus }}
-                <br />
                 <p class="inside-validator">
                   <i class="bi bi-exclamation-triangle margin-rt"></i> Use 8 or
-                  more characters with a mix of lowercase, upercase letters &
-                  numbers.</p
-                >
-              </span> -->
+                  more characters.
+                </p>
+              </span>
             </div>
           </div>
 
           <div
             class="form-row width-100"
-            *ngFor="let item of items; let indexSection = index"
+            *ngFor="
+              let item of items;
+              let indexSection = index;
+              let last = last
+            "
           >
             <div class="form-check form-check-inline width-100">
               <button
                 matTooltip="Remove field"
                 matTooltipPosition="above"
                 class="iconbutton-neumorphism btn-icon-remove"
-                (click)="removeClonedPhoneField()"
+                (click)="removeClonedPhoneField(indexSection)"
               >
                 <i class="bi bi-node-minus-fill i-bigger"></i>
               </button>
@@ -127,6 +143,10 @@
               <mat-form-field appearance="standard" class="phone-field">
                 <mat-label>Phone number</mat-label>
                 <input
+                  (keyup)="phoneEdited(indexSection)"
+                  onpaste="return false"
+                  onCut="return false"
+                  onwheel="this.blur()"
                   matInput
                   class="input-neumorphism"
                   type="number"
@@ -143,15 +163,27 @@
               >
                 <i class="bi bi-node-plus-fill i-bigger"></i>
               </button>
+              <span
+                *ngIf="hide && last"
+                class="validator-container phoneNumber"
+              >
+                <p class="inside-validator">
+                  <i class="bi bi-exclamation-triangle margin-rt"></i> Please
+                  write a phone number.
+                </p>
+              </span>
             </div>
           </div>
           <div class="form-row d-flex justify-content-center margin-tp">
             <button
               type="submit"
-              value="save"
-              
+              [disabled]="!tenantForm.valid"
+              [ngClass]="
+                !tenantForm.valid
+                  ? 'button-neumorphism-disabled'
+                  : 'button-neumorphism'
+              "
               class="width-50 btn-center"
-              [ngClass]="'button-neumorphism'"
               (click)="saveNewTenant()"
             >
               Create
