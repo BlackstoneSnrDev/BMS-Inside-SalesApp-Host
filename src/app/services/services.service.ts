@@ -84,8 +84,10 @@ export class DataService {
         let newUid = secondaryApp?.auth()?.currentUser?.uid;
         console.log(newUid);
         secondaryApp.auth().signOut();
+
         //    create tenant
         //    add admin uid to tenants uids array
+        
         this.afs
           .collection('Tenant')
           .doc(tenantName)
