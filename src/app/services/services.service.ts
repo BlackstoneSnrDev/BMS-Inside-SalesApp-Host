@@ -95,11 +95,78 @@ createNewTenant(email: any, password: any, tenantName: any) {
             tenant: tenantName,
             uid: newUid,
             admin: true,
+            activeTemplate: 'Demo Template',
+            activeGroup: [],
+            name: 'User Name',
+            username: 'email',
             // ** add rest of user data here **
         })
 //    create initial template with just name, emails, and phone numbers 
         this.afs.collection('Tenant').doc(tenantName).collection('templates').doc('Demo Template').set({ 
-            test: 'test'
+            'First Name': {
+                element_order: 0,
+                element: 'input',
+                element_placeholder: 'First Name',
+                element_table_value: 'First Name',
+                element_type: 'text',
+                element_value: null,
+                showWhileCalling: true,
+            },
+            'Last Name': {
+                element_order: 1,
+                element: 'input',
+                element_placeholder: 'Last Name',
+                element_table_value: 'Last Name',
+                element_type: 'text',
+                element_value: null,
+                showWhileCalling: true,
+            },
+            'Phone Number': {
+                element_order: 2,
+                element: 'input',
+                element_placeholder: 'Phone Number',
+                element_table_value: 'Phone Number',
+                element_type: 'text',
+                element_value: null,
+                showWhileCalling: true,
+            },
+            'Email Address': {
+                element_order: 3,
+                element: 'input',
+                element_placeholder: 'Email Address',
+                element_table_value: 'Email Address',
+                element_type: 'text',
+                element_value: null,
+                showWhileCalling: true,
+            },
+            'Address': {
+                element_order: 4,
+                element: 'input',
+                element_placeholder: 'Address',
+                element_table_value: 'Address',
+                element_type: 'text',
+                element_value: null,
+                showWhileCalling: true,
+            },
+            'Balance': {
+                element_order: 5,
+                element: 'input',
+                element_placeholder: 'Balance',
+                element_table_value: 'Balance',
+                element_type: 'number',
+                element_value: null,
+                showWhileCalling: true,
+            },
+            'Date of Birth': {
+                element_order: 6,
+                element: 'input',
+                element_placeholder: 'Date of Birth',
+                element_table_value: 'Date of Birth',
+                element_type: 'text',
+                element_value: null,
+                showWhileCalling: true,
+            },
+            templateName: 'Demo Template',
         })
 //    add phone numbers to phoneNumbers collection
 
@@ -174,3 +241,5 @@ async getClientList(clientArray: any) {
 // phone numbers into array
 // remove caps lock and error message
 // add dropdown of coaches 
+
+// add name field to tenant creation
