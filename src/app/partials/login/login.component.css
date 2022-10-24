@@ -65,14 +65,14 @@
 }
 
 .logo {
-  width: 15rem;
-  height: 15rem;
-  border-radius: 100%;
+  width: 24rem;
+  height: 12rem;
+  margin-top: 13%;
+  margin-bottom: 7%;
 }
 
 .logo-container {
   text-align: center;
-  height: 15rem;
 }
 
 .loginForm {

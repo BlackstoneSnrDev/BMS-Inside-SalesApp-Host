@@ -32,6 +32,7 @@
               <i class="bi bi-person-circle i-my-navbar"></i>
             </a>
           </div>
+
           <div class="dropdown-content">
             <div
               class="my-navbar-tab"
@@ -43,17 +44,9 @@
               </a>
             </div>
           </div>
-          <div class="dropdown-content">
-            <div
-              class="my-navbar-tab"
-              matTooltip="Log out"
-              matTooltipPosition="right"
-            >
-              <a class="a-my-navbar" (click)="onLogout()">
-                <i class="bi bi-box-arrow-left i-my-navbar"></i>
-              </a>
-            </div>
-          </div>
+        </div>
+        <div class="txt-my-navbar">
+          {{ userInfo.name }}
         </div>
       </li>
       <li class="my-navbar-tab-container" *ngFor="let tab of navbartabs">
@@ -73,6 +66,6 @@
 </div>
 
 <!-- Angular components -->
-<div class="container-fluid">
+<div class="container-fluid partials">
   <router-outlet (activate)="onActivate($event)"></router-outlet>
 </div>

@@ -46,8 +46,8 @@
   width: 3rem;
 }
 
-.my-navbar-tab-container.default-tab{
-padding: 1rem 0 0 0;
+.my-navbar-tab-container.default-tab {
+  padding: 1rem 0 0 0;
 }
 
 .my-navbar-tab:hover {
@@ -77,6 +77,10 @@ padding: 1rem 0 0 0;
   font-size: 1rem !important;
   overflow-wrap: break-word;
   width: fit-content;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  width: 108%;
+  text-align: center;
 }
 
 .dropdown-content {
@@ -122,4 +126,8 @@ padding: 1rem 0 0 0;
 
 ::ng-deep .mat-tooltip {
   white-space: pre-line !important;
+}
+
+.container-fluid.partials{
+padding: 0;
 }
